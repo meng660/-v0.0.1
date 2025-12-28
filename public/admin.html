@@ -1,0 +1,31 @@
+<h3>添加视频</h3>
+<input id="title" placeholder="标题">
+<input id="url" placeholder="视频URL">
+<select id="type">
+  <option value="iframe">iframe</option>
+  <option value="video">video</option>
+</select>
+<button onclick="add()">添加</button>
+
+<h3>在线用户</h3>
+<button onclick="online()">刷新</button>
+<pre id="out"></pre>
+
+<script>
+function add(){
+ fetch('/api?action=add_video',{
+  method:'POST',
+  body:JSON.stringify({
+    title:title.value,
+    url:url.value,
+    type:type.value
+  })
+ });
+}
+
+function online(){
+ fetch('/api?action=online')
+  .then(r=>r.json())
+  .then(d=>out.textContent=JSON.stringify(d,null,2));
+}
+</script>

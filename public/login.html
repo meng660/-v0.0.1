@@ -1,0 +1,14 @@
+<input id="u" placeholder="账号">
+<input id="p" type="password">
+<button onclick="login()">登录</button>
+
+<script>
+function login(){
+ fetch('/api?action=login',{
+  method:'POST',
+  body:JSON.stringify({username:u.value,password:p.value})
+ }).then(r=>{
+  r.ok ? location.href='/' : alert('失败');
+ });
+}
+</script>
